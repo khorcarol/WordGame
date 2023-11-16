@@ -46,26 +46,33 @@ public class Game extends JPanel {
         }
         return game;
     }
-    public boolean validMove(Tile tile, Grid grid){
-        if (tileselection.isEmpty()){return true;}
+
+    public boolean validMove(Tile tile, Grid grid) {
+        if (tileselection.isEmpty()) {
+            return true;
+        }
         Point lastTilePoint = grid.positionOf(tileselection.getLast());
-        Point newTilePoint =grid.positionOf(tile);
+        Point newTilePoint = grid.positionOf(tile);
         return (Math.abs(newTilePoint.getX() - lastTilePoint.getX()) <= 1.0) && (Math.abs(newTilePoint.getY() - lastTilePoint.getY()) <= 1.0);
     }
 
 
-    public void setCurrentWord(){
+    public void setCurrentWord() {
         String submit = "";
-        for (Tile t :tileselection){
-            submit= submit.concat(String.valueOf(t.letter()));
+        for (Tile t : tileselection) {
+            submit = submit.concat(String.valueOf(t.letter()));
         }
         currentword = submit.toLowerCase();
 
     }
-    public void setCurrentScore(){
-        for (Tile t :tileselection){
-            currentscore= currentscore+ t.value();
-        }}
+
+    public void setCurrentScore() {
+        int val = 0;
+        for (Tile t : tileselection) {
+            val += t.value();
+        }
+        currentscore += val * tileselection.size();
+    }
 
     public boolean checkWord() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -146,16 +153,15 @@ public class Game extends JPanel {
                     for (Tile t : tileselection) {
                         deactivate(t, grid, gui);
                     }
-                    val.setText("Valid Word: "+ currentword);
+                    val.setText("Valid Word: " + currentword);
 
                 } else {
                     for (Tile t : tileselection) {
                         activate(t, grid, gui);
                     }
-                    val.setText("Invalid Word: "+currentword);
+                    val.setText("Invalid Word: " + currentword);
                 }
                 tileselection.clear();
-                setCurrentScore();
                 scoreLabel.setText("Total Score: " + currentscore);
             }
         });
@@ -173,13 +179,11 @@ public class Game extends JPanel {
 
                     //add to arraylist of letter pressed
                     tileselection.add(source);
-                }
-
-                else if (tileselection.contains(source)){
+                } else if (tileselection.contains(source)) {
                     int index = tileselection.indexOf(source);
-                    for (int i= tileselection.size(); i > index; i--){
+                    for (int i = tileselection.size(); i > index; i--) {
                         Tile last = tileselection.removeLast();
-                        activate(last,grid,gui);
+                        activate(last, grid, gui);
                     }
                 }
 
