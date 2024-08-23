@@ -12,6 +12,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 
 /**
  * Game This is a basic class that can be modified to create a word game.
@@ -25,7 +28,9 @@ public class Game extends JPanel {
     private static final long serialVersionUID = 1L;
     private static Game game;
     private static String currentword = "";
-    private final String filePath = "C:\\Users\\shunt\\Cambridge\\Java\\S3\\Supo3\\src\\main\\java\\stk31\\WordGame\\OOPIncompleteWordGame\\src\\main\\resources\\words.txt";
+    private String basePath = new File("").getAbsolutePath(); // Get the absolute path of the current directory
+    private final String relativePath = "src\\main\\resources\\words.txt"; // Relative path
+    private final String filePath = Paths.get(basePath, relativePath).toString(); // Combine paths
     private final ArrayList<Tile> tileselection = new ArrayList<Tile>();
     private int currentscore = 0;
 
@@ -75,6 +80,7 @@ public class Game extends JPanel {
     }
 
     public boolean checkWord() {
+        System.out.println((filePath));
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             setCurrentWord();
