@@ -1,7 +1,7 @@
 java/stk31/DecoratorDesignPattern
 java/stk31/StateDesignPattern
 java/stk31/StrategyDesignPattern
-java/stk31/resources/S3.md
+resources/S3.md
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
