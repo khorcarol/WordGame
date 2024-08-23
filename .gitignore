@@ -1,6 +1,6 @@
-java/stk31/DecoratorDesignPattern
-java/stk31/StateDesignPattern
-java/stk31/StrategyDesignPattern
+src/main/java/stk31/DecoratorDesignPattern
+src/main/java/stk31/StateDesignPattern
+src/main/java/stk31/StrategyDesignPattern
 resources/S3.md
 
 target/
